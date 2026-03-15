@@ -18,7 +18,25 @@ const octokit = new Octokit({
         fetch: undefined,
         timeout: 0
     }  
-})
-(async () => {
-    
-})();
+});
+
+async function getTopOpenSourceRepos() {
+    try {
+        const response = await octokit.rest.search.repos({
+            q: "stars:>50000",
+            sort: "stars",
+            order: "desc",
+            per_page: 10
+        });
+        return response.data.items;
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
+getTopOpenSourceRepos().then(repos => {
+    console.log("Top Open Source Repositories:");
+    repos.forEach(repo => {
+        console.log(`${repo.full_name} - ${repo.stargazers_count}`);
+    });
+});
