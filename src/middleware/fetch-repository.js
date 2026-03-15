@@ -17,6 +17,8 @@ const octokit = new Octokit({
         agent: undefined,
         fetch: undefined,
         timeout: 0
-    }
+    }  
+})
+(async () => {
     
-});
+})();
