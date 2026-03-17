@@ -6,11 +6,26 @@ class FetchRepositoryFields {
         this.starThreshold = starThreshold; 
         this.repoCount = repoCount;
 
-        const repositories = this.fetchHelper.getTopOpenSourceRepos(this.starThreshold);
-        this.repositories = repositories.slice(0, this.repoCount);
+        (async () => {
+            try {
+                const repositories = await this.fetchHelper.getTopOpenSourceRepos(this.starThreshold);
 
-        console.log(`Fetched top ${this.repoCount} repositories with more than ${this.starThreshold} stars.`);
-    }   
+                if (!repositories || repositories.length === 0) {
+                    console.log("No repositories found.");
+                    return;
+                }
+                
+                const topRepos = repositories.slice(0, this.repoCount);
+
+                for (const repo of topRepos) {
+                    console.log(`Repository: ${repo.full_name}`);
+                    console.log(`Stars: ${repo.stargazers_count}`);
+                }
+            } catch (err) {
+                console.error("Error fetching repositories:", err);
+            }
+        })();
+    }
 }
 
 export default FetchRepositoryFields;
