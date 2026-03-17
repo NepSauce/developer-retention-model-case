@@ -1,4 +1,4 @@
-import FetchHelper from "../utils/fetch-helper";
+import FetchHelper from "../utils/fetch-helper.js";
 
 class FetchRepositoryFields {
     constructor(starThreshold, repoCount) {
