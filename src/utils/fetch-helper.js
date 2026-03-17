@@ -49,6 +49,17 @@ class FetchHelper {
             console.error("Error:", error);
         }
     }
+
+    async getContributorDetails(userName) {
+        try {
+            const response = await this.octokit.rest.users.getByUsername({
+                username: userName
+            });
+            return response.data;
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    }
 }
 
 export default FetchHelper;
