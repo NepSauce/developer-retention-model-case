@@ -36,6 +36,19 @@ class FetchHelper {
             console.error("Error:", error);
         }
     }
+
+    async getRepoContributors(owner, repo) {
+        try {
+            const response = await this.octokit.rest.repos.listContributors({
+                owner,
+                repo,
+                per_page: 100
+            });
+            return response.data;
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    }
 }
 
 export default FetchHelper;
