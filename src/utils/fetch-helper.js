@@ -24,10 +24,10 @@ class FetchHelper {
         });
     }
 
-    async getTopOpenSourceRepos() {
+    async getTopOpenSourceRepos(starThreshold) {
         try {
             const response = await this.octokit.rest.search.repos({
-                q: "stars:>50000",
+                q: `stars:>${starThreshold}`,
                 sort: "stars",
                 order: "desc",
                 per_page: 10
