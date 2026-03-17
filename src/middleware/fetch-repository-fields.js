@@ -12,3 +12,5 @@ class FetchRepositoryFields {
         console.log(`Fetched top ${this.repoCount} repositories with more than ${this.starThreshold} stars.`);
     }   
 }
+
+export default FetchRepositoryFields;
