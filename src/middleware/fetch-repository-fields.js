@@ -1,9 +1,10 @@
 import FetchHelper from "../utils/fetch-helper.js";
 
 class FetchRepositoryFields {
-    constructor(starThreshold, repoCount) {
+    constructor(starThreshold, contributorThreshold, repoCount) {
         this.fetchHelper = new FetchHelper();
         this.starThreshold = starThreshold; 
+        this.contributorThreshold = contributorThreshold;
         this.repoCount = repoCount;
 
         (async () => {

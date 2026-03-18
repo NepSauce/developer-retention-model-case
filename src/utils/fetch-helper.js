@@ -61,6 +61,24 @@ class FetchHelper {
             console.error("Error:", error);
         }
     }
+
+    async getReposPastThreshold(starThreshold, contributorThreshold) {
+        try {
+            const repos = await this.getTopOpenSourceRepos(starThreshold);
+            const filteredRepos = [];
+            
+            for (const repo of repos) {
+                const contributors = await this.getRepoContributors(repo.owner.login, repo.name);
+                if (contributors.length >= contributorThreshold) {
+                    filteredRepos.push(repo);
+                }
+            }
+            return filteredRepos;
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    }
+
 }
 
 export default FetchHelper;
