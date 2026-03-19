@@ -32,6 +32,7 @@ class FetchHelper {
                 order: "desc",
                 per_page: 100
             });
+            
             return response.data.items;
         } catch (error) {
             console.error("Error:", error);
@@ -45,6 +46,7 @@ class FetchHelper {
                 repo,
                 per_page: 100
             });
+
             return response.data;
         } catch (error) {
             console.error("Error:", error);
@@ -56,6 +58,7 @@ class FetchHelper {
             const response = await this.octokit.rest.users.getByUsername({
                 username: userName
             });
+
             return response.data;
         } catch (error) {
             console.error("Error:", error);
