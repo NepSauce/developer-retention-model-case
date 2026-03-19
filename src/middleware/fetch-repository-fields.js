@@ -27,6 +27,20 @@ class FetchRepositoryFields {
             }
         })();
     }
+
+    async getReposPastContributorThreshold(repositories, contributorThreshold) {
+        const filteredRepos = [];
+
+        for (const repo of repositories) {
+            const contributors = await this.fetchHelper.getRepoContributors(repo.owner.login, repo.name);
+            
+            if (contributors && contributors.length > contributorThreshold) {
+                filteredRepos.push(repo);
+            }
+        }
+        return filteredRepos;
+
+    }
 }
 
 export default FetchRepositoryFields;
