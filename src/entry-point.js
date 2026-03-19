@@ -6,7 +6,7 @@ const REPO_COUNT = 10;
 
 async function main() {
     const fetchRepositoryFields = new FetchRepositoryFields(STAR_THRESHOLD, CONTRIBUTOR_THRESHOLD, REPO_COUNT);
-    // wait for the middleware async initialization to finish so logs appear
+
     if (fetchRepositoryFields && fetchRepositoryFields.ready) {
         await fetchRepositoryFields.ready;
     }

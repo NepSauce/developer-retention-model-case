@@ -9,9 +9,9 @@ class FetchRepositoryFields {
 
         this.ready = (async () => {
             console.log("FetchRepositoryFields: initialization started");
+
             try {
                 const repositories = await this.fetchHelper.getTopOpenSourceRepos(this.starThreshold) || [];
-                console.log(`FetchRepositoryFields: fetched ${repositories.length} repositories`);
                 const filteredRepos = await this.getReposPastContributorThreshold(repositories, this.contributorThreshold);
 
                 if (!filteredRepos || filteredRepos.length === 0) {
