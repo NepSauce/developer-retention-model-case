@@ -30,7 +30,7 @@ class FetchHelper {
                 q: `stars:>${starThreshold}`,
                 sort: "stars",
                 order: "desc",
-                per_page: 10
+                per_page: 100
             });
             return response.data.items;
         } catch (error) {
@@ -51,7 +51,7 @@ class FetchHelper {
         }
     }
 
-    async getContributorDetails(userName) {
+    async getRepoContributorDetails(userName) {
         try {
             const response = await this.octokit.rest.users.getByUsername({
                 username: userName
@@ -61,6 +61,18 @@ class FetchHelper {
             console.error("Error:", error);
         }
     }
-}
 
+    async getRepoContributorStats(owner, repo) {
+        try {
+            const response = await this.octokit.rest.repos.getContributorsStats({
+                owner,
+                repo,
+            });
+
+            return response.data;
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    }
+}
 export default FetchHelper;
