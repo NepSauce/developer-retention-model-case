@@ -1,10 +1,15 @@
 import FetchRepositoryFields from "./middleware/fetch-repository-fields.js";
 
-const STAR_THRESHOLD = 50000;
+const STAR_THRESHOLD = 1000;
+const CONTRIBUTOR_THRESHOLD = 100;
 const REPO_COUNT = 10;
 
 async function main() {
-    const fetchRepositoryFields = new FetchRepositoryFields(STAR_THRESHOLD, REPO_COUNT);
+    const fetchRepositoryFields = new FetchRepositoryFields(STAR_THRESHOLD, CONTRIBUTOR_THRESHOLD, REPO_COUNT);
+
+    if (fetchRepositoryFields && fetchRepositoryFields.ready) {
+        await fetchRepositoryFields.ready;
+    }
 }
 
 main();
