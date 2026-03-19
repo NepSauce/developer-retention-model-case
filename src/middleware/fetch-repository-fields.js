@@ -34,10 +34,15 @@ class FetchRepositoryFields {
         const filteredRepos = [];
 
         for (const repo of repositories) {
-            const contributors = await this.fetchHelper.getRepoContributors(repo.owner.login, repo.name);
+            try {
+                const contributors = await this.fetchHelper.getRepoContributorStats(repo.owner.login, repo.name) || [];
+                const contributorCount = contributors.length;
 
-            if (contributors && contributors.length > contributorThreshold) {
-                filteredRepos.push(repo);
+                if (contributorCount > contributorThreshold) {
+                    filteredRepos.push(repo);
+                }
+            } catch (err) {
+                console.error(`Failed to fetch contributors for ${repo.full_name}:`, err);
             }
         }
         return filteredRepos;
