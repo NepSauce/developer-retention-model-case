@@ -1,4 +1,4 @@
-const db = require('./database.js');
+import db from './database.js';
 
 const createTableQuery = `
 CREATE TABLE IF NOT EXISTS repositories (
@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS repositories (
     contributors_count INTEGER NOT NULL,
     stars_count INTEGER NOT NULL
 );
-`;  
+`;
 
 db.run(createTableQuery, (err) => {
     if (err) {
@@ -17,4 +17,4 @@ db.run(createTableQuery, (err) => {
     }
 });
 
-module.exports = db;
+export default db;
