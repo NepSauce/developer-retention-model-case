@@ -24,13 +24,13 @@ class FetchHelper {
         });
     }
 
-    async getTopOpenSourceRepos(starThreshold) {
+    async getTopOpenSourceRepos(starThreshold, count) {
         try {
             const response = await this.octokit.rest.search.repos({
                 q: `stars:>${starThreshold}`,
                 sort: "stars",
                 order: "desc",
-                per_page: 25
+                per_page: count
             });
 
             return response.data.items;
